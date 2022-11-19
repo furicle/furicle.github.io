@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-11-19T14:01:58-05:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">The lamest site you’ll see today</title><subtitle>Placeholder website.  Seriously.  Hit me up on Mastodon.</subtitle><entry><title type="html">Placeholder Intro</title><link href="http://localhost:4000/placeholder/intro/2022/11/19/welcome-to-jekyll.html" rel="alternate" type="text/html" title="Placeholder Intro" /><published>2022-11-19T13:43:46-05:00</published><updated>2022-11-19T13:43:46-05:00</updated><id>http://localhost:4000/placeholder/intro/2022/11/19/welcome-to-jekyll</id><content type="html" xml:base="http://localhost:4000/placeholder/intro/2022/11/19/welcome-to-jekyll.html"><![CDATA[<p>This is (at present) mostly just a placeholder page.</p>
+
+<p>I’m</p>
+<ul>
+  <li>a typical SMB sysadmin geek</li>
+  <li>a father of three</li>
+  <li>a husband of one</li>
+  <li>I prefer he/him</li>
+</ul>
+
+<p>You can interact with me on <a href="https://mastodon.social/@furicle">Mastodon</a></p>]]></content><author><name></name></author><category term="placeholder" /><category term="intro" /><summary type="html"><![CDATA[This is (at present) mostly just a placeholder page.]]></summary></entry></feed>
