@@ -51,7 +51,7 @@ But after poking a bit, I found&lt;/p&gt;
 &lt;li&gt;instructions that were incomplete&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;I imagine I could get it to work, but the vibes weren't great.&lt;/p&gt;
-&lt;p&gt;So throwing another dart at the board, let's try (Pelican)[https://getpelican.com].
+&lt;p&gt;So throwing another dart at the board, let's try &lt;a href="https://getpelican.com"&gt;Pelican&lt;/a&gt;.
 AGPL, lots of activity on the repository, output looks pretty simple, made with a programming language I have scripted in, and extensive docs.&lt;/p&gt;
 &lt;p&gt;There's a quickstart, that actually recommends reading the full docs,  and full docs that tell you to start with the quick start :-)&lt;/p&gt;
 &lt;p&gt;So I read thru the quickstart, then moved to the skipping around in the full docs before I did anything.&lt;/p&gt;
