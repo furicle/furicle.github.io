@@ -44,10 +44,12 @@ It kinda worked, but I never liked the process, or the software.  I'm sure it's 
 &lt;p&gt;But the other day I had a snark inspiration that was too long for a single masto post, and I didn't want to break it up.  I didn't find a good way to make it appear the way I wanted - without having a blog again.&lt;/p&gt;
 &lt;p&gt;So here we go again I guess.&lt;/p&gt;
 &lt;p&gt;My first thought was &lt;a href="https://github.com/gyptazy/manpageblog"&gt;manpageblog&lt;/a&gt;.  It looked very simple and straight forward, just what I was after.
-But after poking a bit, I found
-* broken links on the README page
-* a demo site that was down
-* instructions that were incomplete&lt;/p&gt;
+But after poking a bit, I found&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;broken links on the README page&lt;/li&gt;
+&lt;li&gt;a demo site that was down&lt;/li&gt;
+&lt;li&gt;instructions that were incomplete&lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;I imagine I could get it to work, but the vibes weren't great.&lt;/p&gt;
 &lt;p&gt;So throwing another dart at the board, let's try (Pelican)[https://getpelican.com].
 AGPL, lots of activity on the repository, output looks pretty simple, made with a programming language I have scripted in, and extensive docs.&lt;/p&gt;
