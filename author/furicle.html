@@ -21,7 +21,75 @@
 
                 <aside id="featured" class="body">
                     <article>
-                        <h1 class="entry-title"><a href="https://www.furicle.org/powershell-ffmpeg-snippet.html">A Powershell ffmpeg Snippet</a></h1>
+                        <h1 class="entry-title"><a href="https://www.furicle.org/my-immortal.html">My Immortal</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2024-12-19T11:33:58-05:00">
+                Published: Thu 19 December 2024
+        </abbr>
+                <br />
+                <abbr class="modified" title="2024-12-19T11:33:58-05:00">
+                        Updated: Thu 19 December 2024
+                </abbr>
+
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="https://www.furicle.org/author/furicle.html">furicle</a>
+                </address>
+        <p>In <a href="https://www.furicle.org/category/poetry.html">Poetry</a>.</p>
+<p>tags: <a href="https://www.furicle.org/tag/lyrics.html">Lyrics</a> <a href="https://www.furicle.org/tag/00s.html">00&#39;s</a> </p>        
+</footer><!-- /.post-info --><p>Today's selection doesn't hit near as hard without <a href="https://www.youtube.com/watch?v=5anLPw0Efmo">that angelic voice</a>, but nonetheless...  </p>
+<h2>My Immortal</h2>
+<h3>Evanescence</h3>
+<p>I'm so tired of being here<br>
+Suppressed by all my childish fears<br>
+And if you have to leave<br>
+I wish that you would just leave<br>
+'Cause your presence still lingers here<br>
+And it won't leave me alone  </p>
+<p>These wounds won't seem to heal<br>
+This pain is just too real<br>
+There's just too much that time cannot erase  </p>
+<p>When you cried, I'd wipe away all of your tears<br>
+When you'd scream, I'd fight away all of your fears<br>
+And I held your hand through all of these years<br>
+But you still have all of me  </p>
+<p>You used to captivate me by your resonating light<br>
+Now I'm bound by the life you left behind<br>
+Your face it haunts my once pleasant dreams<br>
+Your voice it chased away all the sanity in me  </p>
+<p>These wounds won't seem to heal<br>
+This pain is just too real<br>
+There's just too much that time cannot erase  </p>
+<p>When you cried, I'd wipe away all of your tears<br>
+When you'd scream, I'd fight away all of your fears<br>
+And I held your hand through all of these years<br>
+But you still have all of me  </p>
+<blockquote>
+<p>I've tried so hard to tell myself that you're gone<br>
+But though you're still with me<br>
+I've been alone all along  </p>
+</blockquote>
+<p>When you cried, I'd wipe away all of your tears<br>
+When you'd scream, I'd fight away all of your fears<br>
+I held your hand through all of these years<br>
+But you still have all of me  </p>
+<p>Me, me  </p>
+<h3>Written by: David Hodges, Amy Lee, Ben Moody</h3>
+<h3>Album: Fallen</h3>
+<h3>Released: 2003</h3>
+<p>Lyrics provided by <a href="https://www.musixmatch.com/lyrics/Evanescence/My-Immortal">Musixmatch</a>  </p>                    </article>
+                </aside><!-- /#featured -->
+                    <section id="content" class="body">
+                        <h1>Other articles</h1>
+                        <hr />
+                        <ol id="posts-list" class="hfeed">
+
+                <li><article class="hentry">
+                    <header>
+                        <h1><a href="https://www.furicle.org/powershell-ffmpeg-snippet.html" rel="bookmark"
+                               title="Permalink to A Powershell ffmpeg Snippet">A Powershell ffmpeg Snippet</a></h1>
+                    </header>
+
+                    <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2024-11-20T12:53:58-05:00">
                 Published: Wed 20 November 2024
@@ -36,46 +104,12 @@
                 </address>
         <p>In <a href="https://www.furicle.org/category/tech.html">Tech</a>.</p>
 <p>tags: <a href="https://www.furicle.org/tag/ffmpeg.html">ffmpeg</a> <a href="https://www.furicle.org/tag/powershell.html">powershell</a> </p>        
-</footer><!-- /.post-info --><p>This is a short snippet to convert a bunch of mp4 movie files to webp format using ffmpeg.</p>
+</footer><!-- /.post-info -->                        <p>This is a short snippet to convert a bunch of mp4 movie files to webp format using ffmpeg.</p>
 <p>A little verbose perhaps, but I find it easy to remember and recreate, and it makes sense when you read it.</p>
-<p>Built in progress bar, and no worries about quoting or escaping stuff!  Take that !#bash</p>
-<p>Have something else that won't be finished in seconds?  Replace the <code>*mp4</code> input, and the <code>ffmpeg</code> line with whatever program/process you need.</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c"># using the reasonable defaults, size down to 640x480, one pass, with a progress bar</span>
-<span class="c"># for a whole folder of mp4s.  Reduction in file size is remarkable.</span>
-
-<span class="nv">$count</span><span class="p">=</span><span class="n">0</span>
-<span class="nv">$fred</span><span class="p">=</span><span class="nb">get-childitem</span> <span class="p">*</span><span class="n">mp4</span>
-<span class="k">foreach</span> <span class="p">(</span><span class="nv">$entry</span> <span class="k">in</span> <span class="nv">$fred</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nv">$count</span><span class="p">++</span>
-    <span class="nv">$in</span><span class="p">=</span><span class="nv">$entry</span><span class="p">.</span><span class="n">name</span>
-    <span class="nv">$out</span><span class="p">=</span><span class="nv">$entry</span><span class="p">.</span><span class="n">basename</span><span class="p">+</span><span class="s2">&quot;.webm&quot;</span>
-    <span class="nv">$percentage</span> <span class="p">=</span> <span class="p">(</span><span class="nv">$count</span><span class="p">/</span><span class="nv">$fred</span><span class="p">.</span><span class="n">length</span><span class="p">*</span><span class="n">100</span><span class="p">)</span>
-    <span class="nv">$activity</span> <span class="p">=</span> <span class="s2">&quot;Converting {0} of {1} ...&quot;</span> <span class="o">-f</span> <span class="nv">$count</span><span class="p">,</span> <span class="nv">$fred</span><span class="p">.</span><span class="n">length</span>
-    <span class="nb">write-progress</span> <span class="n">-Activity</span> <span class="nv">$activity</span> <span class="n">-Status</span> <span class="nv">$in</span> <span class="n">-PercentComplete</span> <span class="nv">$percentage</span>
-    <span class="n">ffmpeg</span> <span class="n">-hide_banner</span> <span class="n">-loglevel</span> <span class="n">error</span>  <span class="n">-i</span> <span class="nv">$in</span> <span class="n">-vf</span> <span class="n">scale</span><span class="p">=</span><span class="n">640</span><span class="p">:-</span><span class="n">1</span> <span class="nv">$out</span>
-<span class="p">}</span>
-</code></pre></div></td></tr></table></div>
-
-<p>Please note - <code>ffmpeg</code> options aren't a rabbit hole, they're a Marianas Trench of infinite darkness and pressure.
-Enter at your own risk...  Me, I'm happy in my floaty on the surface.</p>                    </article>
-                </aside><!-- /#featured -->
-                    <section id="content" class="body">
-                        <h1>Other articles</h1>
-                        <hr />
-                        <ol id="posts-list" class="hfeed">
+<p>Built in progress bar, and no worries about quoting or escaping …</p>
+                        <a class="readmore" href="https://www.furicle.org/powershell-ffmpeg-snippet.html">read more</a>
+                    </div><!-- /.entry-content -->
+                </article></li>
 
                 <li><article class="hentry">
                     <header>
