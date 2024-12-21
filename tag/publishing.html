@@ -21,7 +21,53 @@
 
                 <aside id="featured" class="body">
                     <article>
-                        <h1 class="entry-title"><a href="https://www.furicle.org/a-new-hope.html">A New Hope</a></h1>
+                        <h1 class="entry-title"><a href="https://www.furicle.org/omg-tracking.html">OMG G.O.A.T. Tracking!</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2024-12-20T21:24:46-05:00">
+                Published: Fri 20 December 2024
+        </abbr>
+                <br />
+                <abbr class="modified" title="2024-12-21T16:19:33-05:00">
+                        Updated: Sat 21 December 2024
+                </abbr>
+
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="https://www.furicle.org/author/furicle.html">furicle</a>
+                </address>
+        <p>In <a href="https://www.furicle.org/category/tech.html">Tech</a>.</p>
+<p>tags: <a href="https://www.furicle.org/tag/pelican.html">pelican</a> <a href="https://www.furicle.org/tag/publishing.html">publishing</a> <a href="https://www.furicle.org/tag/goat-counter.html">goat counter</a> <a href="https://www.furicle.org/tag/privacy.html">privacy</a> </p>        
+</footer><!-- /.post-info --><p>When I set this blog up, I deliberately didn't worry about analytics.  I thought it wasn't needed, and I appreciate a site that isn't calling out to a dozen different tracking sites.  </p>
+<p>After a couple days, I started wondering, has <em>anybody</em> seen this site beside me?  How would I know?  </p>
+<p>It would be nice to have an idea if anything catches anybody's eye.  So I'm softing my hard line.  </p>
+<p>A quick shout out on Mastodon, and I got a great looking suggestion pretty quickly - <a href="https://goatcounter.com">goat counter</a>.<br>
+Thanks <a href="https://hacyderm.io/@esg">@esg</a> !  </p>
+<p>I liked the emphasis on no tracking of personal data, and the open source nature.  The software and it's ideology is well explained there, I won't reproduce it here.  </p>
+<p>Installation was very straightforward, and consisted of two parts.<br>
+Step one, I signed up at the goat counter site, using their service for now instead of self hosting.  I only provided a username and email address, and the website it was going to be installed on.  </p>
+<p>Step two, I added the simple <code>&lt;script&gt;</code> tag they provide to every page I want counted in my blog.  With this pelican installation, that meant I only had to add a single variable into my pelican publishing.yaml  </p>
+<div class="highlight"><pre><span></span><code><span class="n">ANALYTICS</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">&lt;script data-goatcounter=&quot;https://furicle.goatcounter.com/count&quot;</span>
+<span class="s2">        async src=&quot;//gc.zgo.at/count.js&quot;&gt;&lt;/script&gt;</span>
+<span class="s2">        &quot;&quot;&quot;</span>
+</code></pre></div>
+
+<p>Interestingly, it did not work right away - but not because of a problem goat tracker.  I run uBlock Origin on pretty much all my browsers, and the 'Easy Privacy' blocking list, blocks goat counter by default.  I disabled it for me, and tested, and the tracking works great.  </p>
+<p>So, is this a problem?  I've decided no.  It's actually good that a common privacy tool like uBlock works correctly.  If you don't want to be tracked, you won't be, just by doing what you are already doing.  And if you aren't running an ad blocker, I'd strongly suggest that you do!  </p>
+<p>Will I end up with any logged visits on my website?  That remains to be seen.  Maybe Mom will drop by :-)</p>
+<p>If you'd like more info about using goat tracker, or have a question or comment, please, hit me up on Mastodon, and we can continue a conversation, or I can update this blog to be more helpful.</p>                    </article>
+                </aside><!-- /#featured -->
+                    <section id="content" class="body">
+                        <h1>Other articles</h1>
+                        <hr />
+                        <ol id="posts-list" class="hfeed">
+
+                <li><article class="hentry">
+                    <header>
+                        <h1><a href="https://www.furicle.org/a-new-hope.html" rel="bookmark"
+                               title="Permalink to A New Hope">A New Hope</a></h1>
+                    </header>
+
+                    <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2024-11-15T12:53:58-05:00">
                 Published: Fri 15 November 2024
@@ -36,40 +82,12 @@
                 </address>
         <p>In <a href="https://www.furicle.org/category/tech.html">Tech</a>.</p>
 <p>tags: <a href="https://www.furicle.org/tag/pelican.html">pelican</a> <a href="https://www.furicle.org/tag/publishing.html">publishing</a> <a href="https://www.furicle.org/tag/python.html">python</a> </p>        
-</footer><!-- /.post-info --><p>So I'm setting up a blog again.</p>
-<p>I've had one or two before, but never had enough output to bother keeping them up.</p>
-<p>It was the typical pattern of enthusiasim, a bunch of posting, then slowly the posts drift further and further apart until it's been a year... and you drop it.</p>
-<p>A while back I made a Jykell(?) site and hooked it up to git hub pages,  without really planning on using it, more so I could justify that yearly domain renewal bill :-)
-It kinda worked, but I never liked the process, or the software.  I'm sure it's a me thing, not a Jykell thing, but it didn't gel.</p>
-<p>I've swapped from Twitter to Mastodon completely, and that was good enough for the little snippets I liked throwing out from time to time.</p>
-<p>But the other day I had a snark inspiration that was too long for a single masto post, and I didn't want to break it up.  I didn't find a good way to make it appear the way I wanted - without having a blog again.</p>
-<p>So here we go again I guess.</p>
-<p>My first thought was <a href="https://github.com/gyptazy/manpageblog">manpageblog</a>.  It looked very simple and straight forward, just what I was after.
-But after poking a bit, I found</p>
-<ul>
-<li>broken links on the README page</li>
-<li>a demo site that was down</li>
-<li>instructions that were incomplete</li>
-</ul>
-<p>I imagine I could get it to work, but the vibes weren't great.</p>
-<p>So throwing another dart at the board, let's try <a href="https://getpelican.com">Pelican</a>.
-AGPL, lots of activity on the repository, output looks pretty simple, made with a programming language I have scripted in, and extensive docs.</p>
-<p>There's a quickstart, that actually recommends reading the full docs,  and full docs that tell you to start with the quick start :-)</p>
-<p>So I read thru the quickstart, then moved to the skipping around in the full docs before I did anything.</p>
-<p>The docs seem to be <em>good</em> so far, with things spelled out clearly, but there's some odd choices like the back and forth above around the quickstart.</p>
-<p>Take for instance the <a href="https://docs.getpelican.com/en/stable/install.html#">Installing</a> section - there's five paragraphs of how to install, followed by
-"While the above is the simplest method, the recommended approach is to create a virtual environment for Pelican via virtualenv before installing Pelican."
-To their credit, they go on to explain how to do that, but why wait for six paragraphs to mention the 'recommended' way?</p>
-<p>And then I hit "Typographical enhancements can be enabled in your settings file, but first the requisite Typogrify library must be installed:"</p>
-<p>I dunno, maybe I'm not the typical user, but what the heck exactly are the "typographical enhancements?"    Five cylinder words without any explanation is never a good thing, in my opinion.</p>
-<p>None the less I've persevered (read, spent five to ten minutes a couple times when I had a minute to poke at it) and got something working.</p>
-<p>I'm not sure I'll publish more info on the how and what, since I was hardly organized about  it.</p>
-<p>If that's something you do want to see, hit me up on Mastodon to write it down.</p>
-<p>As for content going forward, I'm planning on having no plan.   Right now I've got some rough thoughts that fall into either techy sysadmin stuff,  or musings from a middle aged parent and partner, or snark.<br>
-If I dump the snark here, maybe I'll expose the people around me to it a little less.</p>
-<p>I will provide this blog over rss, and try to tag things fairly well.  That way you can either subscribe to tech, snark, or the whole random static experience etc.</p>
-<p>Stay tuned as I flesh it out.  Or don't, and have a nice day.</p>                    </article>
-                </aside><!-- /#featured -->
+</footer><!-- /.post-info -->                        <p>Stereotypical sysadmin does stereotypical bog thing again, stereotypically</p>
+                        <a class="readmore" href="https://www.furicle.org/a-new-hope.html">read more</a>
+                    </div><!-- /.entry-content -->
+                </article></li>
+                    </ol><!-- /#posts-list -->
+                    </section><!-- /#content -->
                 <section id="extras" class="body">
                                 <div class="blogroll">
                                         <h2>links</h2>
