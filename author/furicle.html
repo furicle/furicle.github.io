@@ -21,7 +21,96 @@
 
                 <aside id="featured" class="body">
                     <article>
-                        <h1 class="entry-title"><a href="https://www.furicle.org/livin-on-the-edge.html">Livin' On The Edge</a></h1>
+                        <h1 class="entry-title"><a href="https://www.furicle.org/using-precommit.html">Using pre-commit</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2025-01-12T17:37:14-05:00">
+                Published: Sun 12 January 2025
+        </abbr>
+
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="https://www.furicle.org/author/furicle.html">furicle</a>
+                </address>
+        <p>In <a href="https://www.furicle.org/category/tech.html">Tech</a>.</p>
+<p>tags: <a href="https://www.furicle.org/tag/pre-commit.html">pre-commit</a> <a href="https://www.furicle.org/tag/python.html">python</a> <a href="https://www.furicle.org/tag/git.html">git</a> </p>        
+</footer><!-- /.post-info --><p>I have a bunch of small repositories I maintain, for scripts I use at work, or other bits and pieces, like the one for this blog.</p>
+<p>I'm not using github or other large repositories, they're stored on machines I control, and accessed via ssh and tailscale.  Simple, straight forward and reliable.</p>
+<p>Inkeeping with that simple and reliable theme, I'm not doing CI/CD pipelines, but I do have a few tasks I run using git's built in 'hooks'.__
+For example, if I update a script I use on several different computers, a post-commit hook copies the latest version of the script to those machines, when I commit it.</p>
+<p>I like using linters to help me spot my missteps <sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> but don't always remember to run them.
+Then I found <a href="https://pre-commit.com/">precommit</a>, and I'm quite enjoying it.</p>
+<p>The instructions on the site are good, but pretty developer focused.  They don't convey the magic of using it.</p>
+<ol>
+<li>Install pre-commit.  It's a python thing, but before you run away screaming, try <code>pipx install pre-commit</code>  Worked fine for me, even on Windows.  If you don't have pipx installed, try <code>sudo apt install pipx</code> or <code>sudo dnf install pipx</code>.  pipx is a great way to get python command line tools installed and available, without dealing directly with virtual envs and setting up paths.  If you don't have/want pipx, then I'll redirect you back to the pre-commit website to get that installed.</li>
+<li>In your repository, create a file called <code>.pre-commit-config.yaml</code>  and add 'projects' and 'hooks' for the issues and languages you want to check.  If I'm adding this to a repository with a bash script and a README.md file, then I'd create a file that looks like this:
+``` repos:<ul>
+<li>repo: https://github.com/shellcheck-py/shellcheck-py
+    hooks:<ul>
+<li>id: shellcheck</li>
+</ul>
+</li>
+<li>repo: https://github.com/pre-commit/pre-commit-hooks
+    hooks:<ul>
+<li>id: check-added-large-files</li>
+<li>id: check-case-conflict</li>
+<li>id: check-illegal-windows-names</li>
+<li>id: check-merge-conflict</li>
+<li>id: check-shebang-scripts-are-executable</li>
+<li>id: end-of-file-fixer</li>
+<li>id: trailing-whitespace</li>
+</ul>
+</li>
+<li>repo: https://github.com/thlorenz/doctoc
+    hooks:<ul>
+<li>id: doctoc
+    args: ["--notitle"]</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="mf">3.</span><span class="w"> </span><span class="n">Now</span><span class="w"> </span><span class="kr">for</span><span class="w"> </span><span class="n">some</span><span class="w"> </span><span class="n">magic</span><span class="mf">...</span><span class="w">  </span><span class="n">in</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="n">folder</span><span class="p">,</span><span class="w"> </span><span class="kr">run</span><span class="w"> </span><span class="err">`</span><span class="n">pre</span><span class="o">-</span><span class="n">commit</span><span class="w"> </span><span class="n">install</span><span class="err">`</span><span class="w">   </span><span class="n">That</span><span class="w"> </span><span class="n">will</span><span class="w"> </span><span class="n">set</span><span class="w"> </span><span class="n">up</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">pre</span><span class="o">-</span><span class="n">commit</span><span class="w"> </span><span class="n">packaget</span><span class="w"> </span><span class="kr">to</span><span class="w"> </span><span class="kr">run</span><span class="w"> </span><span class="n">when</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">commit</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">file</span><span class="p">,</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">don</span><span class="err">&#39;</span><span class="n">t</span><span class="w"> </span><span class="n">have</span><span class="w"> </span><span class="kr">to</span><span class="w"> </span><span class="n">edit</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">hook</span><span class="w"> </span><span class="n">files</span><span class="mf">.</span>
+<span class="mf">4.</span><span class="w"> </span><span class="p">(</span><span class="n">optional</span><span class="p">)</span><span class="w"> </span><span class="kr">run</span><span class="w">  </span><span class="err">`</span><span class="n">pre</span><span class="o">-</span><span class="n">commit</span><span class="w"> </span><span class="n">autoupdate</span><span class="err">`</span><span class="w">  </span><span class="n">This</span><span class="w"> </span><span class="n">will</span><span class="w"> </span><span class="kr">get</span><span class="w"> </span><span class="n">all</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">latest</span><span class="w"> </span><span class="n">versions</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">linting</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">checking</span><span class="w"> </span><span class="kr">to</span><span class="n">ols</span><span class="mf">.</span>
+<span class="mf">5.</span><span class="w"> </span><span class="p">(</span><span class="n">optional</span><span class="p">)</span><span class="w"> </span><span class="kr">To</span><span class="w"> </span><span class="n">check</span><span class="w"> </span><span class="n">all</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">existing</span><span class="w"> </span><span class="n">files</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="kr">on</span><span class="n">e</span><span class="w"> </span><span class="n">time</span><span class="w"> </span><span class="n">pass</span><span class="p">,</span><span class="w"> </span><span class="kr">run</span><span class="w"> </span><span class="err">`</span><span class="n">pre</span><span class="o">-</span><span class="n">commit</span><span class="w"> </span><span class="kr">run</span><span class="w"> </span><span class="o">--</span><span class="n">all</span><span class="o">-</span><span class="n">files</span><span class="err">`</span>
+
+<span class="n">From</span><span class="w"> </span><span class="n">here</span><span class="w"> </span><span class="kr">on</span><span class="w"> </span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="n">whenever</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="kr">run</span><span class="w"> </span><span class="err">`</span><span class="n">git</span><span class="w"> </span><span class="n">commit</span><span class="err">`</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="n">will</span><span class="w"> </span><span class="kr">run</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">checks</span><span class="w"> </span><span class="kr">for</span><span class="w"> </span><span class="n">you</span><span class="p">,</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">prevent</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">commit</span><span class="w"> </span><span class="kr">if</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="n">finds</span><span class="w"> </span><span class="n">issues</span><span class="mf">.</span>
+
+<span class="kr">For</span><span class="w"> </span><span class="n">example</span><span class="p">:</span><span class="err">`</span>
+
+<span class="err">```</span><span class="n">bash</span>
+<span class="err">»»»»</span><span class="w"> </span><span class="n">git</span><span class="w"> </span><span class="n">commit</span><span class="w"> </span><span class="o">-</span><span class="n">v</span>
+<span class="n">check</span><span class="w"> </span><span class="kr">for</span><span class="w"> </span><span class="n">added</span><span class="w"> </span><span class="n">large</span><span class="w"> </span><span class="n">files</span><span class="mf">..............................................</span><span class="n">Passed</span>
+<span class="n">check</span><span class="w"> </span><span class="kr">for</span><span class="w"> </span><span class="n">case</span><span class="w"> </span><span class="n">conflicts</span><span class="mf">.................................................</span><span class="n">Passed</span>
+<span class="n">check</span><span class="w"> </span><span class="n">illegal</span><span class="w"> </span><span class="n">windows</span><span class="w"> </span><span class="n">names</span><span class="mf">..........................</span><span class="p">(</span><span class="n">no</span><span class="w"> </span><span class="n">files</span><span class="w"> </span><span class="kr">to</span><span class="w"> </span><span class="n">check</span><span class="p">)</span><span class="n">Skipped</span>
+<span class="n">check</span><span class="w"> </span><span class="kr">for</span><span class="w"> </span><span class="n">merge</span><span class="w"> </span><span class="n">conflicts</span><span class="mf">................................................</span><span class="n">Passed</span>
+<span class="n">check</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="n">scripts</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">shebangs</span><span class="w"> </span><span class="n">are</span><span class="w"> </span><span class="n">executable</span><span class="mf">..........................</span><span class="n">Passed</span>
+<span class="n">fix</span><span class="w"> </span><span class="kr">end</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">files</span><span class="mf">.........................................................</span><span class="n">Passed</span>
+<span class="n">trim</span><span class="w"> </span><span class="n">trailing</span><span class="w"> </span><span class="n">whitespace</span><span class="mf">.................................................</span><span class="n">Passed</span>
+<span class="n">doctoc</span><span class="mf">...................................................................</span><span class="n">Passed</span>
+</code></pre></div>
+
+<p>I didn't have to install anything else, just that yaml file, and it dealt with the rest.  Very slick.<br>
+Go through the website for more info, checks you can implement, and to see what's available for your programming language or project.</p>
+<div class="footnote">
+<hr>
+<ol>
+<li id="fn:1">
+<p><a href="https://www.musixmatch.com/lyrics/Queen-40/we-are-the-champions-live-2#:~:text=And%20bad%20mistakes%2C%20I%27ve%20made%20a%20few">Cue Freddie</a>&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>                    </article>
+                </aside><!-- /#featured -->
+                    <section id="content" class="body">
+                        <h1>Other articles</h1>
+                        <hr />
+                        <ol id="posts-list" class="hfeed">
+
+                <li><article class="hentry">
+                    <header>
+                        <h1><a href="https://www.furicle.org/livin-on-the-edge.html" rel="bookmark"
+                               title="Permalink to Livin' On The Edge">Livin' On The Edge</a></h1>
+                    </header>
+
+                    <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2025-01-12T15:01:00-05:00">
                 Published: Sun 12 January 2025
@@ -32,112 +121,15 @@
                 </address>
         <p>In <a href="https://www.furicle.org/category/poetry.html">Poetry</a>.</p>
 <p>tags: <a href="https://www.furicle.org/tag/lyrics.html">Lyrics</a> <a href="https://www.furicle.org/tag/90s.html">90&#39;s</a> </p>        
-</footer><!-- /.post-info --><h2>Livin' On The Edge</h2>
+</footer><!-- /.post-info -->                        <h2>Livin' On The Edge</h2>
 <h3>Aerosmith</h3>
 <p>This is one of those cases where the pop-rock 3:05 song format<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> doesn't translate that well to the page.
 And honestly, it feels a bit padded out for length even as a song.
 I resisted the urge to trim.</p>
-<p>In spite of all that, the same people that mastered the art of nudge nudge wink wink,<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup> 
-snuck a bit of social commentary into this album.</p>
-<p>There's something wrong with the world today
-I don't know what it is
-Something's wrong with our eyes
-We're seeing things in a different way
-And God knows it ain't his
-It sure ain't no surprise, yeah</p>
-<p>Living on the edge
-Living on the edge
-Living on the edge
-Living on the edge</p>
-<p>There's something wrong with the world today
-The light bulb's getting dim
-There's meltdown in the sky
-If you can judge a wise man
-By the color of his skin
-Then mister you're a better man than I, oh</p>
-<p>Living on the edge
-(You can't help yourself from falling)
-Living on the edge
-(You can't help yourself at all)
-Living on the edge
-(You can't stop yourself from falling)
-Living on the edge
-(Everybody, everybody)</p>
-<p>Tell me what you think about your situation
-Complication, aggravation
-Is getting to you, yeah
-If Chicken Little tells you that the sky is falling
-Even if it wasn't, would you still come crawling
-Back again?
-I bet you would my friend
-Again, and again, and again, and again, and again</p>
-<p>Yeah, tell me what you think about your situation
-Complication, aggravation
-Is getting to you
-If Chicken Little tells you that the sky is falling
-Even if it wasn't, would you still come crawling
-Back again?
-I bet you would my friend
-Again, and again, and again, and again</p>
-<p>Something right with the world today
-And everybody knows it's wrong
-But we can tell 'em no or we could let it go
-But I would rather be a hanging on</p>
-<p>Living on the edge
-(You can't help yourself from falling)
-Living on the edge
-(You can't help yourself at all)
-Living on the edge
-(You can't stop yourself from falling)
-Living on the edge
-(Everybody, everybody)</p>
-<p>Living on the edge
-Living on the edge
-Living on the edge
-Yeah, yeah, yeah, yeah...</p>
-<p>Get talkin' to me
-Living on the edge
-You can't help yourself from falling
-Living on the edge
-You can't help yourself at all
-Living on the edge
-You can't stop yourself from falling
-Living on the edge</p>
-<p>Living on the edge
-You can't help yourself
-You can't help yourself
-Living on the edge
-You can't help yourself at all</p>
-<p>Living on the edge
-You can't help yourself
-You can't help yourself
-Living on the edge
-You can't help yourself
-You can't help yourself
-Living on the edge
-You can't help yourself at all</p>
-<p>Living on the edge
-Yeah, yeah, yeah...</p>
-<h3>Written by: Joe Perry, Mark Hudson, Steven Tyler</h3>
-<h3>Album: Get A Grip</h3>
-<h3>Released: 1993</h3>
-<p>Lyrics provided by Musixmatch <a href="https://www.musixmatch.com/lyrics/Aerosmith-1/livin-on-the-edge">Musixmatch</a></p>
-<div class="footnote">
-<hr>
-<ol>
-<li id="fn:1">
-<p><a href="https://www.musixmatch.com/lyrics/Billy-Joel/The-Entertainer">no, it's not 3:05 - that's a Billy Joel reference</a>&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
-</li>
-<li id="fn:2">
-<p><a href="https://www.musixmatch.com/lyrics/Aerosmith/love-in-an-elevator-single-version-1">Going down, Mr Tyler?</a>&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
-</li>
-</ol>
-</div>                    </article>
-                </aside><!-- /#featured -->
-                    <section id="content" class="body">
-                        <h1>Other articles</h1>
-                        <hr />
-                        <ol id="posts-list" class="hfeed">
+<p>In spite of all …</p>
+                        <a class="readmore" href="https://www.furicle.org/livin-on-the-edge.html">read more</a>
+                    </div><!-- /.entry-content -->
+                </article></li>
 
                 <li><article class="hentry">
                     <header>

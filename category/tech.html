@@ -21,7 +21,96 @@
 
                 <aside id="featured" class="body">
                     <article>
-                        <h1 class="entry-title"><a href="https://www.furicle.org/omg-tracking.html">OMG G.O.A.T. Tracking!</a></h1>
+                        <h1 class="entry-title"><a href="https://www.furicle.org/using-precommit.html">Using pre-commit</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2025-01-12T17:37:14-05:00">
+                Published: Sun 12 January 2025
+        </abbr>
+
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="https://www.furicle.org/author/furicle.html">furicle</a>
+                </address>
+        <p>In <a href="https://www.furicle.org/category/tech.html">Tech</a>.</p>
+<p>tags: <a href="https://www.furicle.org/tag/pre-commit.html">pre-commit</a> <a href="https://www.furicle.org/tag/python.html">python</a> <a href="https://www.furicle.org/tag/git.html">git</a> </p>        
+</footer><!-- /.post-info --><p>I have a bunch of small repositories I maintain, for scripts I use at work, or other bits and pieces, like the one for this blog.</p>
+<p>I'm not using github or other large repositories, they're stored on machines I control, and accessed via ssh and tailscale.  Simple, straight forward and reliable.</p>
+<p>Inkeeping with that simple and reliable theme, I'm not doing CI/CD pipelines, but I do have a few tasks I run using git's built in 'hooks'.__
+For example, if I update a script I use on several different computers, a post-commit hook copies the latest version of the script to those machines, when I commit it.</p>
+<p>I like using linters to help me spot my missteps <sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> but don't always remember to run them.
+Then I found <a href="https://pre-commit.com/">precommit</a>, and I'm quite enjoying it.</p>
+<p>The instructions on the site are good, but pretty developer focused.  They don't convey the magic of using it.</p>
+<ol>
+<li>Install pre-commit.  It's a python thing, but before you run away screaming, try <code>pipx install pre-commit</code>  Worked fine for me, even on Windows.  If you don't have pipx installed, try <code>sudo apt install pipx</code> or <code>sudo dnf install pipx</code>.  pipx is a great way to get python command line tools installed and available, without dealing directly with virtual envs and setting up paths.  If you don't have/want pipx, then I'll redirect you back to the pre-commit website to get that installed.</li>
+<li>In your repository, create a file called <code>.pre-commit-config.yaml</code>  and add 'projects' and 'hooks' for the issues and languages you want to check.  If I'm adding this to a repository with a bash script and a README.md file, then I'd create a file that looks like this:
+``` repos:<ul>
+<li>repo: https://github.com/shellcheck-py/shellcheck-py
+    hooks:<ul>
+<li>id: shellcheck</li>
+</ul>
+</li>
+<li>repo: https://github.com/pre-commit/pre-commit-hooks
+    hooks:<ul>
+<li>id: check-added-large-files</li>
+<li>id: check-case-conflict</li>
+<li>id: check-illegal-windows-names</li>
+<li>id: check-merge-conflict</li>
+<li>id: check-shebang-scripts-are-executable</li>
+<li>id: end-of-file-fixer</li>
+<li>id: trailing-whitespace</li>
+</ul>
+</li>
+<li>repo: https://github.com/thlorenz/doctoc
+    hooks:<ul>
+<li>id: doctoc
+    args: ["--notitle"]</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="mf">3.</span><span class="w"> </span><span class="n">Now</span><span class="w"> </span><span class="kr">for</span><span class="w"> </span><span class="n">some</span><span class="w"> </span><span class="n">magic</span><span class="mf">...</span><span class="w">  </span><span class="n">in</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="n">folder</span><span class="p">,</span><span class="w"> </span><span class="kr">run</span><span class="w"> </span><span class="err">`</span><span class="n">pre</span><span class="o">-</span><span class="n">commit</span><span class="w"> </span><span class="n">install</span><span class="err">`</span><span class="w">   </span><span class="n">That</span><span class="w"> </span><span class="n">will</span><span class="w"> </span><span class="n">set</span><span class="w"> </span><span class="n">up</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">pre</span><span class="o">-</span><span class="n">commit</span><span class="w"> </span><span class="n">packaget</span><span class="w"> </span><span class="kr">to</span><span class="w"> </span><span class="kr">run</span><span class="w"> </span><span class="n">when</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">commit</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">file</span><span class="p">,</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">don</span><span class="err">&#39;</span><span class="n">t</span><span class="w"> </span><span class="n">have</span><span class="w"> </span><span class="kr">to</span><span class="w"> </span><span class="n">edit</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">hook</span><span class="w"> </span><span class="n">files</span><span class="mf">.</span>
+<span class="mf">4.</span><span class="w"> </span><span class="p">(</span><span class="n">optional</span><span class="p">)</span><span class="w"> </span><span class="kr">run</span><span class="w">  </span><span class="err">`</span><span class="n">pre</span><span class="o">-</span><span class="n">commit</span><span class="w"> </span><span class="n">autoupdate</span><span class="err">`</span><span class="w">  </span><span class="n">This</span><span class="w"> </span><span class="n">will</span><span class="w"> </span><span class="kr">get</span><span class="w"> </span><span class="n">all</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">latest</span><span class="w"> </span><span class="n">versions</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">linting</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">checking</span><span class="w"> </span><span class="kr">to</span><span class="n">ols</span><span class="mf">.</span>
+<span class="mf">5.</span><span class="w"> </span><span class="p">(</span><span class="n">optional</span><span class="p">)</span><span class="w"> </span><span class="kr">To</span><span class="w"> </span><span class="n">check</span><span class="w"> </span><span class="n">all</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">existing</span><span class="w"> </span><span class="n">files</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="kr">on</span><span class="n">e</span><span class="w"> </span><span class="n">time</span><span class="w"> </span><span class="n">pass</span><span class="p">,</span><span class="w"> </span><span class="kr">run</span><span class="w"> </span><span class="err">`</span><span class="n">pre</span><span class="o">-</span><span class="n">commit</span><span class="w"> </span><span class="kr">run</span><span class="w"> </span><span class="o">--</span><span class="n">all</span><span class="o">-</span><span class="n">files</span><span class="err">`</span>
+
+<span class="n">From</span><span class="w"> </span><span class="n">here</span><span class="w"> </span><span class="kr">on</span><span class="w"> </span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="n">whenever</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="kr">run</span><span class="w"> </span><span class="err">`</span><span class="n">git</span><span class="w"> </span><span class="n">commit</span><span class="err">`</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="n">will</span><span class="w"> </span><span class="kr">run</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">checks</span><span class="w"> </span><span class="kr">for</span><span class="w"> </span><span class="n">you</span><span class="p">,</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">prevent</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">commit</span><span class="w"> </span><span class="kr">if</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="n">finds</span><span class="w"> </span><span class="n">issues</span><span class="mf">.</span>
+
+<span class="kr">For</span><span class="w"> </span><span class="n">example</span><span class="p">:</span><span class="err">`</span>
+
+<span class="err">```</span><span class="n">bash</span>
+<span class="err">»»»»</span><span class="w"> </span><span class="n">git</span><span class="w"> </span><span class="n">commit</span><span class="w"> </span><span class="o">-</span><span class="n">v</span>
+<span class="n">check</span><span class="w"> </span><span class="kr">for</span><span class="w"> </span><span class="n">added</span><span class="w"> </span><span class="n">large</span><span class="w"> </span><span class="n">files</span><span class="mf">..............................................</span><span class="n">Passed</span>
+<span class="n">check</span><span class="w"> </span><span class="kr">for</span><span class="w"> </span><span class="n">case</span><span class="w"> </span><span class="n">conflicts</span><span class="mf">.................................................</span><span class="n">Passed</span>
+<span class="n">check</span><span class="w"> </span><span class="n">illegal</span><span class="w"> </span><span class="n">windows</span><span class="w"> </span><span class="n">names</span><span class="mf">..........................</span><span class="p">(</span><span class="n">no</span><span class="w"> </span><span class="n">files</span><span class="w"> </span><span class="kr">to</span><span class="w"> </span><span class="n">check</span><span class="p">)</span><span class="n">Skipped</span>
+<span class="n">check</span><span class="w"> </span><span class="kr">for</span><span class="w"> </span><span class="n">merge</span><span class="w"> </span><span class="n">conflicts</span><span class="mf">................................................</span><span class="n">Passed</span>
+<span class="n">check</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="n">scripts</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">shebangs</span><span class="w"> </span><span class="n">are</span><span class="w"> </span><span class="n">executable</span><span class="mf">..........................</span><span class="n">Passed</span>
+<span class="n">fix</span><span class="w"> </span><span class="kr">end</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">files</span><span class="mf">.........................................................</span><span class="n">Passed</span>
+<span class="n">trim</span><span class="w"> </span><span class="n">trailing</span><span class="w"> </span><span class="n">whitespace</span><span class="mf">.................................................</span><span class="n">Passed</span>
+<span class="n">doctoc</span><span class="mf">...................................................................</span><span class="n">Passed</span>
+</code></pre></div>
+
+<p>I didn't have to install anything else, just that yaml file, and it dealt with the rest.  Very slick.<br>
+Go through the website for more info, checks you can implement, and to see what's available for your programming language or project.</p>
+<div class="footnote">
+<hr>
+<ol>
+<li id="fn:1">
+<p><a href="https://www.musixmatch.com/lyrics/Queen-40/we-are-the-champions-live-2#:~:text=And%20bad%20mistakes%2C%20I%27ve%20made%20a%20few">Cue Freddie</a>&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>                    </article>
+                </aside><!-- /#featured -->
+                    <section id="content" class="body">
+                        <h1>Other articles</h1>
+                        <hr />
+                        <ol id="posts-list" class="hfeed">
+
+                <li><article class="hentry">
+                    <header>
+                        <h1><a href="https://www.furicle.org/omg-tracking.html" rel="bookmark"
+                               title="Permalink to OMG G.O.A.T. Tracking!">OMG G.O.A.T. Tracking!</a></h1>
+                    </header>
+
+                    <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2024-12-20T21:24:46-05:00">
                 Published: Fri 20 December 2024
@@ -36,30 +125,10 @@
                 </address>
         <p>In <a href="https://www.furicle.org/category/tech.html">Tech</a>.</p>
 <p>tags: <a href="https://www.furicle.org/tag/pelican.html">pelican</a> <a href="https://www.furicle.org/tag/publishing.html">publishing</a> <a href="https://www.furicle.org/tag/goat-counter.html">goat counter</a> <a href="https://www.furicle.org/tag/privacy.html">privacy</a> </p>        
-</footer><!-- /.post-info --><p>When I set this blog up, I deliberately didn't worry about analytics.  I thought it wasn't needed, and I appreciate a site that isn't calling out to a dozen different tracking sites.  </p>
-<p>After a couple days, I started wondering, has <em>anybody</em> seen this site beside me?  How would I know?  </p>
-<p>It would be nice to have an idea if anything catches anybody's eye.  So I'm softing my hard line.  </p>
-<p>A quick shout out on Mastodon, and I got a great looking suggestion pretty quickly - <a href="https://goatcounter.com">goat counter</a>.<br>
-Thanks <a href="https://hacyderm.io/@esg">@esg</a> !  </p>
-<p>I liked the emphasis on no tracking of personal data, and the open source nature.  The software and it's ideology is well explained there, I won't reproduce it here.  </p>
-<p>Installation was very straightforward, and consisted of two parts.<br>
-Step one, I signed up at the goat counter site, using their service for now instead of self hosting.  I only provided a username and email address, and the website it was going to be installed on.  </p>
-<p>Step two, I added the simple <code>&lt;script&gt;</code> tag they provide to every page I want counted in my blog.  With this pelican installation, that meant I only had to add a single variable into my pelican publishing.yaml  </p>
-<div class="highlight"><pre><span></span><code><span class="n">ANALYTICS</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">&lt;script data-goatcounter=&quot;https://furicle.goatcounter.com/count&quot;</span>
-<span class="s2">        async src=&quot;//gc.zgo.at/count.js&quot;&gt;&lt;/script&gt;</span>
-<span class="s2">        &quot;&quot;&quot;</span>
-</code></pre></div>
-
-<p>Interestingly, it did not work right away - but not because of a problem goat tracker.  I run uBlock Origin on pretty much all my browsers, and the 'Easy Privacy' blocking list, blocks goat counter by default.  I disabled it for me, and tested, and the tracking works great.  </p>
-<p>So, is this a problem?  I've decided no.  It's actually good that a common privacy tool like uBlock works correctly.  If you don't want to be tracked, you won't be, just by doing what you are already doing.  And if you aren't running an ad blocker, I'd strongly suggest that you do!  </p>
-<p>Will I end up with any logged visits on my website?  That remains to be seen.  Maybe Mom will drop by :-)</p>
-<p>If you'd like more info about using goat tracker, or have a question or comment, please, hit me up on Mastodon, and we can continue a conversation, or I can update this blog to be more helpful.</p>                    </article>
-                </aside><!-- /#featured -->
-                    <section id="content" class="body">
-                        <h1>Other articles</h1>
-                        <hr />
-                        <ol id="posts-list" class="hfeed">
+</footer><!-- /.post-info -->                        <p>I've added tracking, it was easy, and it probably won't work</p>
+                        <a class="readmore" href="https://www.furicle.org/omg-tracking.html">read more</a>
+                    </div><!-- /.entry-content -->
+                </article></li>
 
                 <li><article class="hentry">
                     <header>
