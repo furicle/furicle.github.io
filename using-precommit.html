@@ -32,6 +32,10 @@
         <abbr class="published" title="2025-01-12T17:37:14-05:00">
                 Published: Sun 12 January 2025
         </abbr>
+                <br />
+                <abbr class="modified" title="2025-01-13T08:01:14-05:00">
+                        Updated: Mon 13 January 2025
+                </abbr>
 
                 <address class="vcard author">
                         By                                 <a class="url fn" href="https://www.furicle.org/author/furicle.html">furicle</a>
@@ -44,38 +48,39 @@
 For example, if I update a script I use on several different computers, a post-commit hook copies the latest version of the script to those machines, when I commit it.</p>
 <p>I like using linters to help me spot my missteps <sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> but don't always remember to run them.
 Then I found <a href="https://pre-commit.com/">precommit</a>, and I'm quite enjoying it.</p>
-<p>The instructions on the site are good, but pretty developer focused.  They don't convey the magic of using it.</p>
-<ol>
-<li>Install pre-commit.  It's a python thing, but before you run away screaming, try <code>pipx install pre-commit</code>  Worked fine for me, even on Windows.  If you don't have pipx installed, try <code>sudo apt install pipx</code> or <code>sudo dnf install pipx</code>.  pipx is a great way to get python command line tools installed and available, without dealing directly with virtual envs and setting up paths.  If you don't have/want pipx, then I'll redirect you back to the pre-commit website to get that installed.</li>
-<li>
-<p>In your repository, create a file called <code>.pre-commit-config.yaml</code>  and add 'projects' and 'hooks' for the issues and languages you want to check.  If I'm adding this to a repository with a bash script and a README.md file, then I'd create a file that looks like this:</p>
-<p><code>yaml
-    repos:
-    -   repo: https://github.com/shellcheck-py/shellcheck-py
-        hooks:
-        -   id: shellcheck
-    -   repo: https://github.com/pre-commit/pre-commit-hooks
-        hooks:
-        -   id: check-added-large-files
-        -   id: check-case-conflict
-        -   id: check-illegal-windows-names
-        -   id: check-merge-conflict
-        -   id: check-shebang-scripts-are-executable
-        -   id: end-of-file-fixer
-        -   id: trailing-whitespace
-    -   repo: https://github.com/thlorenz/doctoc
-        hooks:
-        -   id: doctoc
-            args: ["--notitle"]</code></p>
-</li>
-<li>
+<p>The instructions on the site are ok, but pretty developer focused.  They undersell the results.</p>
+<p>Install pre-commit.  It's a python thing, but before you run away screaming, try <code>pipx install pre-commit</code>  Worked fine for me, even on Windows.  If you don't have pipx installed, try <code>sudo apt install pipx</code> or <code>sudo dnf install pipx</code>.  pipx is a great way to get python command line tools installed and available, without dealing directly with virtual envs and setting up paths.  If you don't have/want pipx, then I'll redirect you back to the pre-commit website to get that installed.</p>
+<p>In your repository, create a file called <code>.pre-commit-config.yaml</code>  and add 'projects' and 'hooks' for the issues and languages you want to check.  If I'm adding this to a repository with a bash script and a README.md file, then I'd create a file that looks like this</p>
+<div class="highlight"><pre><span></span><code><span class="nt">repos</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">repo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://github.com/shellcheck-py/shellcheck-py</span>
+<span class="w">  </span><span class="nt">hooks</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">shellcheck</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">repo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://github.com/pre-commit/pre-commit-hooks</span>
+<span class="w">  </span><span class="nt">hooks</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">check-added-large-files</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">check-case-conflict</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">check-illegal-windows-names</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">check-merge-conflict</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">check-shebang-scripts-are-executable</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">end-of-file-fixer</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">trailing-whitespace</span><span class="w"> </span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">repo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://github.com/igorshubovych/markdownlint-cli</span>
+<span class="w">  </span><span class="nt">rev</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v0.43.0</span>
+<span class="w">  </span><span class="nt">hooks</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">markdownlint</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">args</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;--disable&quot;</span><span class="p p-Indicator">,</span><span class="s">&quot;MD013&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;MD041&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;--&quot;</span><span class="p p-Indicator">]</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">repo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://github.com/thlorenz/doctoc</span>
+<span class="w">  </span><span class="nt">hooks</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">doctoc</span>
+<span class="w">    </span><span class="nt">args</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;--notitle&quot;</span><span class="p p-Indicator">]</span>
+</code></pre></div>
+
+<p>Each listed id under hooks, is a test it will run.  Pre-commit themselves have a whole series of them, and <a href="https://pre-commit.com/hooks.html">links to other projects</a> with more specific tests, like <code>shellcheck</code> etc.</p>
 <p>Now for some magic...  in that folder, run <code>pre-commit install</code>   That will set up the pre-commit packaget to run when you commit a file, you don't have to edit the hook files.</p>
-</li>
-<li>(optional) run  <code>pre-commit autoupdate</code>  This will get all the latest versions of the linting and checking tools.</li>
-<li>(optional) To check all the existing files with a one time pass, run <code>pre-commit run --all-files</code></li>
-</ol>
+<p>(optional) run  <code>pre-commit autoupdate</code>  This will get all the latest versions of the linting and checking tools.</p>
+<p>(optional) To check all the existing files with a one time pass, run <code>pre-commit run --all-files</code></p>
 <p>From here on out, whenever you run <code>git commit</code> it will run the checks for you, and prevent the commit if it finds issues.</p>
-<p>For example:`</p>
+<p>For example:</p>
 <div class="highlight"><pre><span></span><code>»»»»<span class="w"> </span>git<span class="w"> </span>commit<span class="w"> </span>-v
 check<span class="w"> </span><span class="k">for</span><span class="w"> </span>added<span class="w"> </span>large<span class="w"> </span>files..............................................Passed
 check<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="k">case</span><span class="w"> </span>conflicts.................................................Passed
@@ -89,6 +94,7 @@ doctoc...................................................................Passed
 
 <p>I didn't have to install anything else, just that yaml file, and it dealt with the rest.  Very slick.<br>
 Go through the website for more info, checks you can implement, and to see what's available for your programming language or project.</p>
+<p>As always, if you have questions or comments or info to add, hit me up on <a href="https://mastodon.social/@furicle">the fediverse</a>.</p>
 <div class="footnote">
 <hr>
 <ol>
@@ -128,10 +134,6 @@ Go through the website for more info, checks you can implement, and to see what'
 
                         <p>The theme is by <a rel="nofollow" href="https://www.smashingmagazine.com/2009/08/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
                 </footer><!-- /#contentinfo -->
-
-    
-<script data-goatcounter="https://furicle.goatcounter.com/count"
-        async src="//gc.zgo.at/count.js"></script>
 
         </body>
 </html>

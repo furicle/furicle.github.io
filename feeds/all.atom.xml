@@ -1,42 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Are You Helping?</title><link href="https://www.furicle.org/" rel="alternate"></link><link href="https://www.furicle.org/feeds/all.atom.xml" rel="self"></link><id>https://www.furicle.org/</id><updated>2025-01-12T17:37:14-05:00</updated><entry><title>Using pre-commit</title><link href="https://www.furicle.org/using-precommit.html" rel="alternate"></link><published>2025-01-12T17:37:14-05:00</published><updated>2025-01-12T17:37:14-05:00</updated><author><name>furicle</name></author><id>tag:www.furicle.org,2025-01-12:/using-precommit.html</id><summary type="html">&lt;p&gt;I've started using the pre-commit python tool with my repositories, and it's a easy way to add automated linting, locally.&lt;/p&gt;</summary><content type="html">&lt;p&gt;I have a bunch of small repositories I maintain, for scripts I use at work, or other bits and pieces, like the one for this blog.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Are You Helping?</title><link href="https://www.furicle.org/" rel="alternate"></link><link href="https://www.furicle.org/feeds/all.atom.xml" rel="self"></link><id>https://www.furicle.org/</id><updated>2025-01-13T08:01:14-05:00</updated><entry><title>Using pre-commit</title><link href="https://www.furicle.org/using-precommit.html" rel="alternate"></link><published>2025-01-12T17:37:14-05:00</published><updated>2025-01-13T08:01:14-05:00</updated><author><name>furicle</name></author><id>tag:www.furicle.org,2025-01-12:/using-precommit.html</id><summary type="html">&lt;p&gt;I've started using the pre-commit python tool with my repositories, and it's a easy way to add automated linting, locally.&lt;/p&gt;</summary><content type="html">&lt;p&gt;I have a bunch of small repositories I maintain, for scripts I use at work, or other bits and pieces, like the one for this blog.&lt;/p&gt;
 &lt;p&gt;I'm not using github or other large repositories, they're stored on machines I control, and accessed via ssh and tailscale.  Simple, straight forward and reliable.&lt;/p&gt;
 &lt;p&gt;Inkeeping with that simple and reliable theme, I'm not doing CI/CD pipelines, but I do have a few tasks I run using git's built in 'hooks'.__
 For example, if I update a script I use on several different computers, a post-commit hook copies the latest version of the script to those machines, when I commit it.&lt;/p&gt;
 &lt;p&gt;I like using linters to help me spot my missteps &lt;sup id="fnref:1"&gt;&lt;a class="footnote-ref" href="#fn:1"&gt;1&lt;/a&gt;&lt;/sup&gt; but don't always remember to run them.
 Then I found &lt;a href="https://pre-commit.com/"&gt;precommit&lt;/a&gt;, and I'm quite enjoying it.&lt;/p&gt;
-&lt;p&gt;The instructions on the site are good, but pretty developer focused.  They don't convey the magic of using it.&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Install pre-commit.  It's a python thing, but before you run away screaming, try &lt;code&gt;pipx install pre-commit&lt;/code&gt;  Worked fine for me, even on Windows.  If you don't have pipx installed, try &lt;code&gt;sudo apt install pipx&lt;/code&gt; or &lt;code&gt;sudo dnf install pipx&lt;/code&gt;.  pipx is a great way to get python command line tools installed and available, without dealing directly with virtual envs and setting up paths.  If you don't have/want pipx, then I'll redirect you back to the pre-commit website to get that installed.&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;In your repository, create a file called &lt;code&gt;.pre-commit-config.yaml&lt;/code&gt;  and add 'projects' and 'hooks' for the issues and languages you want to check.  If I'm adding this to a repository with a bash script and a README.md file, then I'd create a file that looks like this:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;yaml
-    repos:
-    -   repo: https://github.com/shellcheck-py/shellcheck-py
-        hooks:
-        -   id: shellcheck
-    -   repo: https://github.com/pre-commit/pre-commit-hooks
-        hooks:
-        -   id: check-added-large-files
-        -   id: check-case-conflict
-        -   id: check-illegal-windows-names
-        -   id: check-merge-conflict
-        -   id: check-shebang-scripts-are-executable
-        -   id: end-of-file-fixer
-        -   id: trailing-whitespace
-    -   repo: https://github.com/thlorenz/doctoc
-        hooks:
-        -   id: doctoc
-            args: ["--notitle"]&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
+&lt;p&gt;The instructions on the site are ok, but pretty developer focused.  They undersell the results.&lt;/p&gt;
+&lt;p&gt;Install pre-commit.  It's a python thing, but before you run away screaming, try &lt;code&gt;pipx install pre-commit&lt;/code&gt;  Worked fine for me, even on Windows.  If you don't have pipx installed, try &lt;code&gt;sudo apt install pipx&lt;/code&gt; or &lt;code&gt;sudo dnf install pipx&lt;/code&gt;.  pipx is a great way to get python command line tools installed and available, without dealing directly with virtual envs and setting up paths.  If you don't have/want pipx, then I'll redirect you back to the pre-commit website to get that installed.&lt;/p&gt;
+&lt;p&gt;In your repository, create a file called &lt;code&gt;.pre-commit-config.yaml&lt;/code&gt;  and add 'projects' and 'hooks' for the issues and languages you want to check.  If I'm adding this to a repository with a bash script and a README.md file, then I'd create a file that looks like this&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nt"&gt;repos&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="p p-Indicator"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;repo&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;https://github.com/shellcheck-py/shellcheck-py&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nt"&gt;hooks&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="p p-Indicator"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;id&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;shellcheck&lt;/span&gt;
+&lt;span class="p p-Indicator"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;repo&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;https://github.com/pre-commit/pre-commit-hooks&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nt"&gt;hooks&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="p p-Indicator"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;id&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;check-added-large-files&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="p p-Indicator"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;id&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;check-case-conflict&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="p p-Indicator"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;id&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;check-illegal-windows-names&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="p p-Indicator"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;id&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;check-merge-conflict&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="p p-Indicator"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;id&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;check-shebang-scripts-are-executable&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="p p-Indicator"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;id&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;end-of-file-fixer&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="p p-Indicator"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;id&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;trailing-whitespace&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;
+&lt;span class="p p-Indicator"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;repo&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;https://github.com/igorshubovych/markdownlint-cli&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nt"&gt;rev&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;v0.43.0&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nt"&gt;hooks&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="p p-Indicator"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;id&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;markdownlint&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="p p-Indicator"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;args&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p p-Indicator"&gt;[&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;--disable&amp;quot;&lt;/span&gt;&lt;span class="p p-Indicator"&gt;,&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;MD013&amp;quot;&lt;/span&gt;&lt;span class="p p-Indicator"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;MD041&amp;quot;&lt;/span&gt;&lt;span class="p p-Indicator"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;--&amp;quot;&lt;/span&gt;&lt;span class="p p-Indicator"&gt;]&lt;/span&gt;
+&lt;span class="p p-Indicator"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;repo&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;https://github.com/thlorenz/doctoc&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nt"&gt;hooks&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="p p-Indicator"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;id&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;doctoc&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;args&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p p-Indicator"&gt;[&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;--notitle&amp;quot;&lt;/span&gt;&lt;span class="p p-Indicator"&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Each listed id under hooks, is a test it will run.  Pre-commit themselves have a whole series of them, and &lt;a href="https://pre-commit.com/hooks.html"&gt;links to other projects&lt;/a&gt; with more specific tests, like &lt;code&gt;shellcheck&lt;/code&gt; etc.&lt;/p&gt;
 &lt;p&gt;Now for some magic...  in that folder, run &lt;code&gt;pre-commit install&lt;/code&gt;   That will set up the pre-commit packaget to run when you commit a file, you don't have to edit the hook files.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;(optional) run  &lt;code&gt;pre-commit autoupdate&lt;/code&gt;  This will get all the latest versions of the linting and checking tools.&lt;/li&gt;
-&lt;li&gt;(optional) To check all the existing files with a one time pass, run &lt;code&gt;pre-commit run --all-files&lt;/code&gt;&lt;/li&gt;
-&lt;/ol&gt;
+&lt;p&gt;(optional) run  &lt;code&gt;pre-commit autoupdate&lt;/code&gt;  This will get all the latest versions of the linting and checking tools.&lt;/p&gt;
+&lt;p&gt;(optional) To check all the existing files with a one time pass, run &lt;code&gt;pre-commit run --all-files&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;From here on out, whenever you run &lt;code&gt;git commit&lt;/code&gt; it will run the checks for you, and prevent the commit if it finds issues.&lt;/p&gt;
-&lt;p&gt;For example:`&lt;/p&gt;
+&lt;p&gt;For example:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;»»»»&lt;span class="w"&gt; &lt;/span&gt;git&lt;span class="w"&gt; &lt;/span&gt;commit&lt;span class="w"&gt; &lt;/span&gt;-v
 check&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;added&lt;span class="w"&gt; &lt;/span&gt;large&lt;span class="w"&gt; &lt;/span&gt;files..............................................Passed
 check&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;case&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;conflicts.................................................Passed
@@ -50,6 +51,7 @@ doctoc...................................................................Passed
 
 &lt;p&gt;I didn't have to install anything else, just that yaml file, and it dealt with the rest.  Very slick.&lt;br&gt;
 Go through the website for more info, checks you can implement, and to see what's available for your programming language or project.&lt;/p&gt;
+&lt;p&gt;As always, if you have questions or comments or info to add, hit me up on &lt;a href="https://mastodon.social/@furicle"&gt;the fediverse&lt;/a&gt;.&lt;/p&gt;
 &lt;div class="footnote"&gt;
 &lt;hr&gt;
 &lt;ol&gt;
