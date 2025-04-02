@@ -21,7 +21,44 @@
 
                 <aside id="featured" class="body">
                     <article>
-                        <h1 class="entry-title"><a href="https://www.furicle.org/using-precommit.html">Using pre-commit</a></h1>
+                        <h1 class="entry-title"><a href="https://www.furicle.org/book-reviews-here.html">Book Reviews Here?</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2025-04-01T20:33:03-04:00">
+                Published: Tue 01 April 2025
+        </abbr>
+                <br />
+                <abbr class="modified" title="2025-04-01T20:33:21-04:00">
+                        Updated: Tue 01 April 2025
+                </abbr>
+
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="https://www.furicle.org/author/furicle.html">furicle</a>
+                </address>
+        <p>In <a href="https://www.furicle.org/category/tech.html">Tech</a>.</p>
+<p>tags: <a href="https://www.furicle.org/tag/books.html">books</a> <a href="https://www.furicle.org/tag/library-thing.html">library-thing</a> </p>        
+</footer><!-- /.post-info --><p>I completed my first book review in a while, and posted it over on <a href="https://www.librarything.com/work/18722/book/284003466">Library Thing</a></p>
+<p>Making a short review shorter,  I liked it, but I didn't love it, but I'm glad I read it.</p>
+<p>The question is, should I be posting these reviews here?</p>
+<p>All the reasons I'm running my own blog still apply - here, it's mine.  Somewhere else, I'm creating content for other people's benefit.</p>
+<p>The other side of the ledger, it's a book review...  it kinda belongs on a book site, where book lovers, looking for information, are going to find it, and like it or hate it.  Here, nobody will find it, especially when they are trying to make a decision on investing time and money on their latest read.</p>
+<p>Library Thing isn't Amazon.  On the other hand, Goodreads wasn't either, when I wrote reviews there.  Do I sound bitter?   Ah well, that ship has sailed.  I don't see Library Thing becoming an acquisition, at least any time soon.</p>
+<p>I think I'll hedge my bets.  Library Thing does have an export function, but not for reviews.  You can however, easily see <a href="https://www.librarything.com/reviews/furicle">all your reviews on a single page</a>.  Amusingly, that just completed review was number 200!</p>
+<p>I did a quick copy-paste into Libre Office Writer, and saved them as a single odt file.  That got me the data I care about backed up and on my system.  Then by running <code>pandoc -f odt -t markdown -o book-reviews.md 'book reviews.odt'</code> I've got a good start on what I need to repeat that here.  I'll take some time and split each of those review into it's own markdown file, then use the markdown to create posts here too.  Let's see how that goes for a while.</p>
+<p>Stay tuned...</p>
+<p>As always, if you have questions or comments or info to add, hit me up on <a href="https://mastodon.social/@furicle">the fediverse</a>.</p>                    </article>
+                </aside><!-- /#featured -->
+                    <section id="content" class="body">
+                        <h1>Other articles</h1>
+                        <hr />
+                        <ol id="posts-list" class="hfeed">
+
+                <li><article class="hentry">
+                    <header>
+                        <h1><a href="https://www.furicle.org/using-precommit.html" rel="bookmark"
+                               title="Permalink to Using pre-commit">Using pre-commit</a></h1>
+                    </header>
+
+                    <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2025-01-12T17:37:14-05:00">
                 Published: Sun 12 January 2025
@@ -36,72 +73,10 @@
                 </address>
         <p>In <a href="https://www.furicle.org/category/tech.html">Tech</a>.</p>
 <p>tags: <a href="https://www.furicle.org/tag/pre-commit.html">pre-commit</a> <a href="https://www.furicle.org/tag/python.html">python</a> <a href="https://www.furicle.org/tag/git.html">git</a> </p>        
-</footer><!-- /.post-info --><p>I have a bunch of small repositories I maintain, for scripts I use at work, or other bits and pieces, like the one for this blog.</p>
-<p>I'm not using github or other large repositories, they're stored on machines I control, and accessed via ssh and tailscale.  Simple, straight forward and reliable.</p>
-<p>Inkeeping with that simple and reliable theme, I'm not doing CI/CD pipelines, but I do have a few tasks I run using git's built in 'hooks'.__
-For example, if I update a script I use on several different computers, a post-commit hook copies the latest version of the script to those machines, when I commit it.</p>
-<p>I like using linters to help me spot my missteps <sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> but don't always remember to run them.
-Then I found <a href="https://pre-commit.com/">precommit</a>, and I'm quite enjoying it.</p>
-<p>The instructions on the site are ok, but pretty developer focused.  They undersell the results.</p>
-<p>Install pre-commit.  It's a python thing, but before you run away screaming, try <code>pipx install pre-commit</code>  Worked fine for me, even on Windows.  If you don't have pipx installed, try <code>sudo apt install pipx</code> or <code>sudo dnf install pipx</code>.  pipx is a great way to get python command line tools installed and available, without dealing directly with virtual envs and setting up paths.  If you don't have/want pipx, then I'll redirect you back to the pre-commit website to get that installed.</p>
-<p>In your repository, create a file called <code>.pre-commit-config.yaml</code>  and add 'projects' and 'hooks' for the issues and languages you want to check.  If I'm adding this to a repository with a bash script and a README.md file, then I'd create a file that looks like this</p>
-<div class="highlight"><pre><span></span><code><span class="nt">repos</span><span class="p">:</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">repo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://github.com/shellcheck-py/shellcheck-py</span>
-<span class="w">  </span><span class="nt">hooks</span><span class="p">:</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">shellcheck</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">repo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://github.com/pre-commit/pre-commit-hooks</span>
-<span class="w">  </span><span class="nt">hooks</span><span class="p">:</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">check-added-large-files</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">check-case-conflict</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">check-illegal-windows-names</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">check-merge-conflict</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">check-shebang-scripts-are-executable</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">end-of-file-fixer</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">trailing-whitespace</span><span class="w"> </span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">repo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://github.com/igorshubovych/markdownlint-cli</span>
-<span class="w">  </span><span class="nt">rev</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v0.43.0</span>
-<span class="w">  </span><span class="nt">hooks</span><span class="p">:</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">markdownlint</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">args</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;--disable&quot;</span><span class="p p-Indicator">,</span><span class="s">&quot;MD013&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;MD041&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;--&quot;</span><span class="p p-Indicator">]</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">repo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://github.com/thlorenz/doctoc</span>
-<span class="w">  </span><span class="nt">hooks</span><span class="p">:</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">doctoc</span>
-<span class="w">    </span><span class="nt">args</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;--notitle&quot;</span><span class="p p-Indicator">]</span>
-</code></pre></div>
-
-<p>Each listed id under hooks, is a test it will run.  Pre-commit themselves have a whole series of them, and <a href="https://pre-commit.com/hooks.html">links to other projects</a> with more specific tests, like <code>shellcheck</code> etc.</p>
-<p>Now for some magic...  in that folder, run <code>pre-commit install</code>   That will set up the pre-commit packaget to run when you commit a file, you don't have to edit the hook files.</p>
-<p>(optional) run  <code>pre-commit autoupdate</code>  This will get all the latest versions of the linting and checking tools.</p>
-<p>(optional) To check all the existing files with a one time pass, run <code>pre-commit run --all-files</code></p>
-<p>From here on out, whenever you run <code>git commit</code> it will run the checks for you, and prevent the commit if it finds issues.</p>
-<p>For example:</p>
-<div class="highlight"><pre><span></span><code>»»»»<span class="w"> </span>git<span class="w"> </span>commit<span class="w"> </span>-v
-check<span class="w"> </span><span class="k">for</span><span class="w"> </span>added<span class="w"> </span>large<span class="w"> </span>files..............................................Passed
-check<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="k">case</span><span class="w"> </span>conflicts.................................................Passed
-check<span class="w"> </span>illegal<span class="w"> </span>windows<span class="w"> </span>names..........................<span class="o">(</span>no<span class="w"> </span>files<span class="w"> </span>to<span class="w"> </span>check<span class="o">)</span>Skipped
-check<span class="w"> </span><span class="k">for</span><span class="w"> </span>merge<span class="w"> </span>conflicts................................................Passed
-check<span class="w"> </span>that<span class="w"> </span>scripts<span class="w"> </span>with<span class="w"> </span>shebangs<span class="w"> </span>are<span class="w"> </span>executable..........................Passed
-fix<span class="w"> </span>end<span class="w"> </span>of<span class="w"> </span>files.........................................................Passed
-trim<span class="w"> </span>trailing<span class="w"> </span>whitespace.................................................Passed
-doctoc...................................................................Passed
-</code></pre></div>
-
-<p>I didn't have to install anything else, just that yaml file, and it dealt with the rest.  Very slick.<br>
-Go through the website for more info, checks you can implement, and to see what's available for your programming language or project.</p>
-<p>As always, if you have questions or comments or info to add, hit me up on <a href="https://mastodon.social/@furicle">the fediverse</a>.</p>
-<div class="footnote">
-<hr>
-<ol>
-<li id="fn:1">
-<p><a href="https://www.musixmatch.com/lyrics/Queen-40/we-are-the-champions-live-2#:~:text=And%20bad%20mistakes%2C%20I%27ve%20made%20a%20few">Cue Freddie</a>&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
-</li>
-</ol>
-</div>                    </article>
-                </aside><!-- /#featured -->
-                    <section id="content" class="body">
-                        <h1>Other articles</h1>
-                        <hr />
-                        <ol id="posts-list" class="hfeed">
+</footer><!-- /.post-info -->                        <p>I've started using the pre-commit python tool with my repositories, and it's a easy way to add automated linting, locally.</p>
+                        <a class="readmore" href="https://www.furicle.org/using-precommit.html">read more</a>
+                    </div><!-- /.entry-content -->
+                </article></li>
 
                 <li><article class="hentry">
                     <header>
